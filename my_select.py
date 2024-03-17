@@ -29,7 +29,7 @@ def select_1():
     # Print the results
     for row in result:
         print(row.id, row.name, row.average_grade)
-
+    return result
 
 def select_2():
     query = (
@@ -50,6 +50,7 @@ def select_2():
     result = query.first()
     # Print the result
     print(result.student_name, result.name, result.gpa)
+    return result
 
 def select_3():
     query = (
@@ -71,6 +72,7 @@ def select_3():
     # Print the results
     for result in results:
         print(result.group_name, result.subject_name, result.average_grade)
+    return result
 
 def select_4():
     # Define the query
@@ -81,25 +83,22 @@ def select_4():
 
     # Print the result
     print("Average Score:", result)
+    return result
 
 def select_5():
-# Define aliases for the tables
-    # Subject = aliased(Subject)
-    # Teacher = aliased(Teacher)
-
     # Define the query
     query = (
         session.query(Subject.name, Teacher.name)
         .join(Teacher, Subject.teacher)
         .filter(Teacher.id == 2)
     )
-
     # Execute the query and fetch the result
     results = query.all()
 
     # Print the results
     for subject_name, teacher_name in results:
         print("Subject:", subject_name, "Teacher:", teacher_name)
+    return results
 
 def select_6():
     query = (
@@ -112,6 +111,7 @@ def select_6():
     # Print the results
     for student_name, group_name in results:
         print(student_name, "-", group_name)
+    return results
 
 def select_7():
     query = (
@@ -133,6 +133,7 @@ def select_7():
             subject_name,
             grade,
         )    
+    return results
 
 def select_8():
     query = (
@@ -158,6 +159,7 @@ def select_8():
             "Average Score:",
             average_score,
         )
+    return results
 
 def select_9():
     query = (
@@ -174,6 +176,7 @@ def select_9():
     # Print the results
     for student_name, subject_name in results:
         print("Student:", student_name, "Subject:", subject_name)
+    return results
 
 
 def select_10():
@@ -192,6 +195,7 @@ def select_10():
     # Print the results
     for teacher_name, subject_name, student_name in results:
         print("Teacher:", teacher_name, "Subject:", subject_name, "Student:", student_name)
+    return results
 
 
 def select_11():
@@ -220,9 +224,10 @@ def select_11():
             "Student:",
             student_name,
         )
+    return results
 
 def select_12():
-# Define the subquery to select the maximum date_of value
+    # Define the subquery to select the maximum date_of value
     subquery_max_date = (
         session.query(func.max(Grade.date_of).label("max_date"))
         .join(Subject, Grade.subject_id == Subject.id)
@@ -248,6 +253,7 @@ def select_12():
     # Print the results
     for result in results:
         print(result)
+    return results
 
 def main():
     commands = list()  # list of command objects
