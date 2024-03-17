@@ -34,19 +34,22 @@ def select_1():
 def select_2():
     query = (
         session.query(
-            Student.name.label("student_name"), func.avg(Grade.grade).label("gpa")
+            Student.name.label('student_name'),
+            Subject.name,
+            func.avg(Grade.grade).label('gpa')
         )
         .join(Grade, Student.id == Grade.student_id)
         .join(Subject, Grade.subject_id == Subject.id)
-        .filter(Subject.name == "Mathematics")
-        .group_by(Student.id)
+        .filter(Subject.id == 1)
+        .group_by(Student.id, Subject.id)
         .order_by(func.avg(Grade.grade).desc())
         .limit(1)
     )
+
     # Execute the query and fetch the result
     result = query.first()
     # Print the result
-    print(result.student_name, result.gpa)
+    print(result.student_name, result.name, result.gpa)
 
 def select_3():
     query = (
